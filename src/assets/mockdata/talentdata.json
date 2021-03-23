@@ -1,0 +1,62 @@
+{
+  "data": {
+    "points": {
+      "maxPoints": 6,
+      "currentPoints": 0
+    },
+    "talentTrees": [
+      {
+        "name": "Talent Path 1",
+        "sequence": 0,
+        "talents": [
+          {
+            "name": "stack",
+            "active": false,
+            "sequence": 0
+          },
+          {
+            "name": "silverware",
+            "active": false,
+            "sequence": 1
+          },
+          {
+            "name": "cake",
+            "active": false,
+            "sequence": 2
+          },
+          {
+            "name": "crown",
+            "active": false,
+            "sequence": 3
+          }
+        ]
+      },
+      {
+        "name": "Talent Path 2",
+        "sequence": 1,
+        "talents": [
+          {
+            "name": "boat",
+            "active": false,
+            "sequence": 0
+          },
+          {
+            "name": "scuba",
+            "active": false,
+            "sequence": 1
+          },
+          {
+            "name": "bolt",
+            "active": false,
+            "sequence": 2
+          },
+          {
+            "name": "skull",
+            "active": false,
+            "sequence": 3
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+@function calcBranchCenterMargins($parentHeight, $parentBorderHeight, $baseHeight, $topBorderHeight, $bottomBorderHeight) {
+    @return (($parentHeight + $parentBorderHeight) - ($baseHeight + $topBorderHeight + $bottomBorderHeight)) / 2;
+}
+
+#talent-trees {
+    @include column-container;
+    
+    .talent-tree-container {
+      @include row-container;
+  
+      margin: 20px 0;
+  
+      @media (max-width: $mediumScreenSize) {
+        flex-direction: column;
+        margin: 5px auto;
+      }
+  
+      h3 {
+        padding: 0 50px 0 20px;
+        margin: 0 auto;
+  
+        @media (max-width: $mediumScreenSize) {
+          margin: 5px 0;
+          padding: 0;
+          align-self: flex-start;
+        }
+      }
+  
+      .talents {
+        flex-direction: row;
+        justify-content: center;
+        margin: 0 auto;
+      }
+    }
+  }
+  
+  .active-talent {
+    border: $iconBorderSize $talentActiveBorderColor solid;
+    @media (max-width:$extraSmallScreenSize) {
+      transform: scale(.75);
+    }
+  }
+  
+  .inactive-talent {
+    border: $iconBorderSize $talentBorderColor solid;
+    @media (max-width:$extraSmallScreenSize) {
+      transform: scale(.75);
+    }
+  }
+  
+  @for $i from 1 through length($icons) {
+    #active-#{nth($icons, $i)} {
+      @include active-icon($i);
+
+      box-shadow: 0 0 5px $talentActiveBorderColor;
+
+      transition: background-color 1s, box-shadow .75s, border-color 1s;
+    }
+  
+    #inactive-#{nth($icons, $i)} {
+      @include inactive-icon($i);
+
+      box-shadow: none;
+
+      transition: background-color 1s, box-shadow .75s, border-color 1s;
+  
+      &:hover {
+        @include active-icon($i);
+      }
+  
+    }
+  }
+  
+  .talent-branch {
+    height: $branchHeight;
+    width: 5vw;
+    
+    max-width: 100px;
+  
+    background-color: $talentBranchInactiveColor;
+  
+    margin: calcBranchCenterMargins($iconHeight, $iconBorderSize, $branchHeight, $branchBorderSize, $branchBorderSize) auto;
+    border-top: $branchBorderSize $talentBranchInactiveBorderColor solid;
+    border-bottom: $branchBorderSize $talentBranchInactiveBorderColor solid;
+  
+    box-shadow: none;
+  
+    transition: background-color 1s, box-shadow .75s, border-color 1s;
+
+    @media (max-width:$extraSmallScreenSize) {
+      display: none;
+    }
+    
+    &.active {
+        background-color: $talentActiveBorderColor;
+        border-color: $talentActiveBorderColor;
+      
+        box-shadow: 0 0 5px $talentActiveBorderColor;
+      
+        transition: background-color 1s, box-shadow 1s, border-color 1s;
+      }
+    
+      &.next {
+        background-color: $talentBackgroundColor;
+        border-color: $talentBorderColor;
+
+        box-shadow: none;
+  
+        transition: background-color 1s, box-shadow .75s, border-color 1s;
+      }
+  }

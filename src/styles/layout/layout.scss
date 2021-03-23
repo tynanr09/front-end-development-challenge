@@ -1,0 +1,32 @@
+@import "../variables";
+
+#title {
+    order: 1;
+  }
+  
+  #main {
+    order: 2;
+  }
+  
+  #point-tracker {
+    order: 2;
+  }
+  
+  #talent-trees {
+    order: 1;
+  }
+  
+  @media (max-width: $mediumScreenSize) {
+    #title {
+      order: 1;
+    }
+    #main {
+      order: 2;
+    }
+    #point-tracker {
+      order: 1;
+    }
+    #talent-trees {
+      order: 2;
+    }
+  }

@@ -1,0 +1,45 @@
+@import "../../styles/variables";
+
+#calculator {
+    background: url("../../assets/talent-calc-bg.png");;
+  
+    border: 2px solid $containerBorderColor;
+  
+    width: calc(100vw - 5px);
+    
+    max-height: $backgroundImageHeight;
+    max-width: $backgroundImageWidth;
+  
+    @media (min-width: $baseScreenSize) {
+      width: $backgroundImageWidth;
+    }
+}
+
+#title {
+    background-color: $primaryContainerColor !important;
+  
+    width: calc(100% - 20px);
+  
+    margin: 10px auto;
+  
+    h1 {
+      margin: 0 auto;
+      padding: 5px 0;
+
+      @media (max-width: $smallScreenSize) {
+        font-size: $titleMobileSize;
+      }
+    }
+}
+  
+  #main {
+    flex-direction: row;
+  
+    width: calc(100% - 20px);
+  
+    padding: 5px auto;
+  
+    @media (max-width: $mediumScreenSize) {
+      flex-direction: column;
+    }
+}

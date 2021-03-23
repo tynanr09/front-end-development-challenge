@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+#point-tracker {
+    justify-content: center;
+    align-self: center;
+  
+    background: $secondaryContainerColor !important;
+    margin: 0 auto;
+  
+    span {
+      display: none;
+    }
+  
+    border: 2px solid $containerBorderColor;
+    padding: 10px 20px;
+  
+    @media (max-width: $mediumScreenSize) {
+      flex-direction: row;
+  
+      padding: 10px 20px;
+  
+      span {
+        display: inline;
+      }
+    }
+
+    @media (max-width: $smallScreenSize) {
+      padding: 5px 10px;
+    }
+}

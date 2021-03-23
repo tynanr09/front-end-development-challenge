@@ -1,0 +1,51 @@
+// Color variables
+$backgroundColor: #0b1115;
+
+$primaryContainerColor: rgba(33, 32, 33, 0.45);
+$secondaryContainerColor: rgba(5, 7, 8, 0.33);
+
+$containerBorderColor: rgba(65, 65, 67, .25);
+
+$primaryTextColor: #ffffff;
+$secondaryTextColor: #405a74;
+
+$talentBorderColor: #414143;
+$talentBackgroundColor: #303133;
+$talentActiveBorderColor: #6eadee;
+
+$talentBranchInactiveColor: rgba(65, 65, 67, .5);
+$talentBranchInactiveBorderColor: rgba(48, 49, 51, .5);
+
+
+// Font variables
+$titleSize: 1.75em;
+$subHeadingSize: .75em;
+$titleMobileSize: 1.15em;
+
+
+// Icon variables
+$icons: 'stack', 'silverware', 'cake', 'crown', 'boat', 'scuba', 'bolt', 'skull';
+$iconHeight: 50px;
+$iconWidth: 50px;
+$iconBorderSize: 4px;
+
+
+// Imaage Variables
+$backgroundImageWidth: 998px;
+$backgroundImageHeight: 373px;
+
+$talentImages: url('../assets/talent-icons-sprite.png');
+$talentActiveImageYOffset: -50px;
+$talentActiveImageXOffset: -50px;
+
+
+// Media variables
+$mediumScreenSize: 700px;
+$smallScreenSize: 450px;
+$extraSmallScreenSize: 300px;
+$baseScreenSize: 1000px;
+
+
+// Tree variables
+$branchHeight: 10px;
+$branchBorderSize: 2px;
