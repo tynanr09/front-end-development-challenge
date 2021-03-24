@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Front-End Developer Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dependencies can be installed with `npm ci` and the app can be built and deployed using `npm run build`.
 
-## Available Scripts
+This challenge was built using:
 
-In the project directory, you can run:
+- React and JavaScript
+- SCSS (SASS)
 
-### `npm start`
+## The Challenge
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The challenge was to build a js application that would allow players to replicate in game loadouts with the following functionality.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Users can spend up to 6 points on their loadout.
+- Users will left click to buy a talent.
+- Users will right click to remove a talent.
+- Each talent only counts as a single point.
+- Items must be selected in order.
 
-### `npm test`
+Below is the mockup:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Example](samples/example.png)
 
-### `npm run build`
+## Results
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Here is a screenshot of the results of the challenge with all the functionality above implemented:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Result_Browser](samples/results_browser.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Along with functionality for the challenge, I focused my attention on a few other key areas.
 
-### `npm run eject`
+### Fluid/Responsive Design
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+I wanted to make the app usable on both browsers and mobile devices.  Here is a screenshot from an iPhone.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Result_Mobile](samples/results_iphone.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can see how the screen reorganizes to have the point display above the talent trees along with the spacing and size of the branches between the talents.
+When the screen width is dropped to 300 pixels or less, we can see similar changes below.  The only difference is the branches are no longer displayed.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Result_SmallScreen](samples/results_300pixel.png)
 
-## Learn More
+### Data Driven
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Mocked Backend Service
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In order to simulate the data coming from a backend service, a mock  data file was created in [`src\assets\mockdata\talentdata.json`](https://github.com/tynanr09/front-end-development-challenge/tree/main/src/assets/mockdata).
 
-### Code Splitting
+When a user first accesses the page the data is loaded from this file.  From here a user can add and remove talents as they see fit.  Upon each action the data is saved to the browsers local storage and will be retrieved from the local storage when users naviagte back to the page.  If the local storage is cleared, the data will be retrieve from the mock data file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This logic is stored in the [`talentService.js`](https://github.com/tynanr09/front-end-development-challenge/tree/main/src/services) file.
 
-### Analyzing the Bundle Size
+#### Data Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+With the mock data file mentioned above, we can make edits to the file in order to change how the talents are displayed.  We have three different data structures that allow us to change what is displayed from the frontend.
 
-### Making a Progressive Web App
+- Points
+  - maxPoints: Determines the max amount of points a user can spend on the loadout.
+  - currentPoints: The number of points the user has currently spent.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Talent Tree
+  - name:  Name of the talent tree.
+  - sequence: Order of the talent trees to be displayed.  The trees can be defined in any order within an array, they will be dispayed on the frontend based on this value.
+  - talents:  List of talents within the tree.
 
-### Advanced Configuration
+- Talent
+  - name: Name of the talent.  Determines the icon to be displayed for the talent.  Currently it only supports the following values:
+    - stack
+    - silverware
+    - cake
+    - crown
+    - boat
+    - scuba
+    - bolt
+    - skull
+  - sequence: Order of the talentss to be displayed.  The talents can be defined in any order within an array, they will be dispayed on the frontend based on this value.
+  - active: Determines if the talent has been bought.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+With this structure we can modify [`src\assets\mockdata\talentdata.json`](https://github.com/tynanr09/front-end-development-challenge/tree/main/src/assets/mockdata) and have our the application respond to the definition of the file.  
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Note:** You will need to clear the local storage if the changes have been made to [`src\assets\mockdata\talentdata.json`](https://github.com/tynanr09/front-end-development-challenge/tree/main/src/assets/mockdata) after accessing the application.

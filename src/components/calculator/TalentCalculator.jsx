@@ -17,22 +17,35 @@ class TalentCalculator extends Component{
             talentTrees: [],
         };
 
-        this.activateTalent = this.activateTalent.bind(this);
-        this.deactivateTalent = this.deactivateTalent.bind(this);
+        this.handleActivateTalent = this.handleActivateTalent.bind(this);
+        this.handleDeactivateTalent = this.handleDeactivateTalent.bind(this);
 
         this.refreshTalents = this.refreshTalents.bind(this);
+        this.saveTalents = this.saveTalents.bind(this);
+    }
+
+    refreshTalents() {
+        let talentData = TalentService.retrieveTalentData();
+        this.setState({
+            points: talentData.points,
+            talentTrees: talentData.talentTrees
+        });
+    }
+
+    saveTalents() {
+        TalentService.saveTalentData(Object.assign(this.state, {}));
+    }
+
+    componentDidMount() {
+        this.refreshTalents();
+    }
+
+    componentDidUpdate() {
+        this.saveTalents();
     }
 
 
-    returnPoint() {
-        const points = Object.create(this.state.points);
-
-        points.currentPoints--;
-
-        this.setState({points: points});
-    }
-
-    activateTalent(treeIndex, talentIndex) {
+    handleActivateTalent(treeIndex, talentIndex) {
         const canSpendPoint = () => {
             return this.state.points.currentPoints < this.state.points.maxPoints;
         }
@@ -44,7 +57,7 @@ class TalentCalculator extends Component{
             var talent = tree.talents[talentIndex];
 
             if (canSpendPoint() && !talent.active && (talentIndex === 0 || tree.talents[talentIndex - 1].active)) {
-                const points = Object.create(this.state.points);
+                const points = Object.assign(this.state.points, {});
 
                 points.currentPoints++;
                 tree.talents[talentIndex].active = true;
@@ -54,7 +67,7 @@ class TalentCalculator extends Component{
         }
     }
 
-    deactivateTalent(treeIndex, talentIndex) {
+    handleDeactivateTalent(treeIndex, talentIndex) {
         let trees = this.state.talentTrees.slice();
         let tree = trees[treeIndex];
 
@@ -62,7 +75,7 @@ class TalentCalculator extends Component{
             var talent = tree.talents[talentIndex];
 
             if (this.state.points.currentPoints > 0 && talent.active && (talentIndex === tree.talents.length - 1 || !tree.talents[talentIndex + 1].active)) {
-                const points = Object.create(this.state.points);
+                const points = Object.assign(this.state.points, {});
 
                 points.currentPoints--;
                 tree.talents[talentIndex].active = false;
@@ -71,19 +84,6 @@ class TalentCalculator extends Component{
             }
         }
     }
-
-    refreshTalents() {
-        let talentData = TalentService.retrieveTalentData();
-        this.setState({
-            points: talentData.points,
-            talentTrees: talentData.talentTrees
-        });
-    }
-
-    componentDidMount() {
-        this.refreshTalents();
-    }
-
 
     render() {
         return (
@@ -105,8 +105,8 @@ class TalentCalculator extends Component{
                                             value={index}
                                             talents={talentTree.talents}
                                             name={talentTree.name}
-                                            activateTalent={this.activateTalent}
-                                            deactivateTalent={this.deactivateTalent}
+                                            handleActivateTalent={this.handleActivateTalent}
+                                            handleDeactivateTalent={this.handleDeactivateTalent}
                                 />
                             )
                         })

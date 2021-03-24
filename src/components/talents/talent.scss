@@ -2,7 +2,7 @@
 @import "../../styles/mixins";
 
 @function calcBranchCenterMargins($parentHeight, $parentBorderHeight, $baseHeight, $topBorderHeight, $bottomBorderHeight) {
-    @return (($parentHeight + $parentBorderHeight) - ($baseHeight + $topBorderHeight + $bottomBorderHeight)) / 2;
+    @return (($parentHeight + (2 * $parentBorderHeight)) - ($baseHeight + $topBorderHeight + $bottomBorderHeight)) / 2;
 }
 
 #talent-trees {
@@ -38,14 +38,28 @@
   }
   
   .active-talent {
-    border: $iconBorderSize $talentActiveBorderColor solid;
+    border: $iconBorderSize solid;
+
+    border-image: linear-gradient(to bottom, #1e3246, #6eadee 21px, #6eadee 22px, #6eadee 36px,#6eadee 37px, #1e3246 58px) 1;
+    box-shadow: 0 0 4px #6eadee;
+
+    transition: box-shadow .75s;
+
     @media (max-width:$extraSmallScreenSize) {
       transform: scale(.75);
     }
   }
   
   .inactive-talent {
-    border: $iconBorderSize $talentBorderColor solid;
+    border: $iconBorderSize solid;
+
+    border-image: linear-gradient(to bottom, #4c4c4c 50%, #3e3e3e 50%) 2;
+    animation: 10s rotate linear infinite;
+    
+    box-shadow: 0 0 5px black;
+
+    transition: box-shadow .75s;
+
     @media (max-width:$extraSmallScreenSize) {
       transform: scale(.75);
     }
@@ -54,18 +68,10 @@
   @for $i from 1 through length($icons) {
     #active-#{nth($icons, $i)} {
       @include active-icon($i);
-
-      box-shadow: 0 0 5px $talentActiveBorderColor;
-
-      transition: background-color 1s, box-shadow .75s, border-color 1s;
     }
   
     #inactive-#{nth($icons, $i)} {
       @include inactive-icon($i);
-
-      box-shadow: none;
-
-      transition: background-color 1s, box-shadow .75s, border-color 1s;
   
       &:hover {
         @include active-icon($i);
@@ -88,7 +94,7 @@
   
     box-shadow: none;
   
-    transition: background-color 1s, box-shadow .75s, border-color 1s;
+    transition: box-shadow .75s;
 
     @media (max-width:$extraSmallScreenSize) {
       display: none;
@@ -98,9 +104,9 @@
         background-color: $talentActiveBorderColor;
         border-color: $talentActiveBorderColor;
       
-        box-shadow: 0 0 5px $talentActiveBorderColor;
+        box-shadow: 0 0 2px $talentActiveBorderColor;
       
-        transition: background-color 1s, box-shadow 1s, border-color 1s;
+        transition: box-shadow 1s;
       }
     
       &.next {
@@ -109,6 +115,6 @@
 
         box-shadow: none;
   
-        transition: background-color 1s, box-shadow .75s, border-color 1s;
+        transition: box-shadow .75s;
       }
   }

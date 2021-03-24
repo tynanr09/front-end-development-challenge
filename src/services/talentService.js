@@ -1,9 +1,14 @@
-import * as talentData from '../assets/mockdata/talentdata.json';
+import * as talentData from "../assets/mockdata/talentdata.json";
 
 
 class TalentService {
     retrieveTalentData = () => {
-        return talentData.data;
+        const savedTalentData = localStorage.getItem("talentData");
+        return (savedTalentData !== undefined && savedTalentData !== null) ? JSON.parse(savedTalentData) : talentData.data;
+    }
+
+    saveTalentData = (newTalentData) => {
+        localStorage.setItem("talentData", JSON.stringify(newTalentData));
     }
 }
 

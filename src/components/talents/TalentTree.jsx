@@ -2,7 +2,7 @@ import { Talent } from ".";
 
 import "./talent.scss";
 
-const TalentTree = ({ talents, name, value, activateTalent, deactivateTalent }) => {
+const TalentTree = ({ talents, name, value, handleActivateTalent, handleDeactivateTalent }) => {
     const renderBranch = (index) => {
 
         const getBranchClasses = () => {
@@ -44,8 +44,8 @@ const TalentTree = ({ talents, name, value, activateTalent, deactivateTalent }) 
                         <Talent key={talent.name + '-' + index}
                                 name={talent.name}
                                 active={talent.active}
-                                handleLeftClick={() => activateTalent(value, index)}
-                                handleRightClick={() => deactivateTalent(value, index)}
+                                handleLeftClick={() => handleActivateTalent(value, index)}
+                                handleRightClick={() => handleDeactivateTalent(value, index)}
                                 renderBranch={() => renderBranch(index)}
                                 isClickable={() => isTalentClickable(index)}
                         />

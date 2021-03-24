@@ -4,14 +4,16 @@
 @mixin active-icon($index) {
   @include icon;
 
-  background: $talentImages (($index * $talentActiveImageXOffset) + $iconWidth) 0;
+  background-image: $talentImages;
+  background-position: (($index * $talentActiveImageXOffset) + $iconWidth) 0;
 }
 
 
 @mixin inactive-icon($index) {
   @include icon;
 
-  background: $talentImages (($index * $talentActiveImageXOffset) + $iconWidth) $talentActiveImageYOffset;
+  background-image: $talentImages;
+  background-position: (($index * $talentActiveImageXOffset) + $iconWidth) $talentActiveImageYOffset;
 }
 
 
